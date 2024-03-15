@@ -43,19 +43,20 @@ export default function Home() {
     fetchProductData();
   }, []);
   return (
-    <div className="bg-violet-800 w-full h-screen flex items-center justify-center">
-      <div className="flex max-h-[750px]  max-w-[450px]  justify-between w-full h-full flex-col md:rounded-md  bg-white">
-        {" "}
-        <div className=" w-full h-full  overflow-auto">
-          <Navbar page="Checkout" />
+    <div className="flex  justify-between w-full min-h-screen flex-col md:rounded-md  bg-white">
+      {" "}
+      <div className=" w-full h-full  overflow-auto">
+        <Navbar page="Checkout" />
 
-          {/* Delivery Details */}
-          {loading ? (
-            <div>Hello</div>
-          ) : (
-            <div>
+        {/* Delivery Details */}
+        {loading ? (
+          <div>Hello</div>
+        ) : (
+          <div className="flex flex-col m-auto max-w-[1500px] lg:flex-row">
+            <div className="w-full lg:w-3/4">
+              {" "}
               <div className="px-8">
-                <div className="font-bold text-black py-3">Deliver Detail</div>
+                <div className="font-bold text-black py-3">Delivery Detail</div>
                 <div className="flex w-max items-center bg-gray-200 rounded p-2">
                   <div className="px-2 text-black">
                     <svg
@@ -75,9 +76,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-
               {/* Phone number input */}
-
               <div className=" px-8 py-4">
                 <div className="border-2 border-gray-300 rounded  flex ">
                   <div className="px-4 text-black p-2 flex items-center justify-center">
@@ -94,16 +93,16 @@ export default function Home() {
                   </div>{" "}
                 </div>
               </div>
-
               {/* Order List */}
-
               <div className="px-8 py-2">
                 <p className="py-2 text-black text-md">Order List</p>
                 <OrderList />
               </div>
+            </div>
 
-              {/* Promo Code */}
+            {/* Promo Code */}
 
+            <div className="lg:w-1/4 w-full">
               {products.length > 0 && (
                 <div className="px-8 py-2">
                   <p className="py-2  text-black text-md">Promo Code</p>
@@ -116,7 +115,7 @@ export default function Home() {
                       ></input>
                     </div>
                     <div className="px-4 p-2 flex items-center justify-center">
-                      <button className="text-sm text-violet-800 font-bold">
+                      <button className="text-sm text-violet-700  font-bold">
                         APPLY
                       </button>
                     </div>
@@ -146,26 +145,42 @@ export default function Home() {
                   </div>
                 </div>
               )}
-            </div>
-          )}
-        </div>
-        {products.length > 0 && (
-          <div className=" flex justify-between items-center py-5 px-8  drop-shadow-lg">
-            <div className="flex text-black flex-col gap-2">
-              <div>Total</div>
-              <div className="font-extrabold">{totalAmount}</div>
-            </div>
-            <div>
-              <button
-                onClick={handlePayment}
-                className="bg-violet-800 text-black p-2 px-4 rounded-md font-bold"
-              >
-                Payment
-              </button>
+              {products.length > 0 && (
+                <div className="lg:flex hidden justify-between items-center py-5 px-8  drop-shadow-lg">
+                  <div className="flex text-black flex-col gap-2">
+                    <div>Total</div>
+                    <div className="font-extrabold">{totalAmount}</div>
+                  </div>
+                  <div>
+                    <button
+                      onClick={handlePayment}
+                      className="bg-violet-700 hover:bg-violet-900 text-black p-2 px-4 rounded-md font-bold"
+                    >
+                      Payment
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
       </div>
+      {products.length > 0 && (
+        <div className="lg:hidden flex justify-between items-center py-5 px-8  drop-shadow-lg">
+          <div className="flex text-black flex-col gap-2">
+            <div>Total</div>
+            <div className="font-extrabold">{totalAmount}</div>
+          </div>
+          <div>
+            <button
+              onClick={handlePayment}
+              className="bg-violet-700 hover:bg-violet-900 text-black p-2 px-4 rounded-md font-bold"
+            >
+              Payment
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -10,7 +10,7 @@ const CheckoutModal = ({ selected, status }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
       <div className="absolute top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50"></div>
-      <div className="bg-white w-2/3 flex gap-5 items-center justify-center flex-col p-6 rounded-lg shadow-lg z-10 relative">
+      <div className="bg-white w-2/3 max-w-[350px] flex gap-5 items-center justify-center flex-col p-6 rounded-lg shadow-lg z-10 relative">
         <div className="text-black flex flex-col items-center justify-center gap-2">
           {status.status === "SUCCESS" ? (
             <div className="text-green-500">
@@ -52,7 +52,7 @@ const CheckoutModal = ({ selected, status }) => {
         <div>
           <Link
             href="/"
-            className="text-black bg-violet-700 hover:bg-violet-900 px-4 p-2 rounded-md shadow-md"
+            className="text-black font-bold bg-violet-700 hover:bg-violet-900 px-4 p-2 rounded-md shadow-md"
           >
             Go to hompage
           </Link>
