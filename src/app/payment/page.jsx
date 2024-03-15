@@ -50,7 +50,7 @@ const Payment = () => {
           <Navbar page="Payment" />
 
           {/* Choose payment method */}
-          <div className="flex flex-col max-w-[1500px] m-auto lg:flex-row">
+          <div className="flex flex-col max-w-[1600px] m-auto lg:flex-row">
             <div className="px-8 lg:w-3/4">
               <p className="font-bold py-2 text-black">Choose Payment Method</p>
               <PaymentMethodList

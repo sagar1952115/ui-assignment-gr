@@ -9,13 +9,22 @@ import axios from "axios";
 import { useStore } from "zustand";
 import useProductStore from "@/store/ProductStore";
 import { useRouter } from "next/navigation";
+import Loader from "./component/Loader";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [phone, setPhone] = useState("");
+  const [coupon, setCoupon] = useState("");
+  const [couponApplied, setCouponApplied] = useState(false);
   const router = useRouter();
-  const { setProducts, setPaymentMethods, totalAmount, products } =
-    useProductStore((state) => state);
+  const {
+    discount,
+    setDiscount,
+    setProducts,
+    setPaymentMethods,
+    totalAmount,
+    products,
+  } = useProductStore((state) => state);
 
   const handlePayment = () => {
     const isValidPhoneNumber = /^\d{10}$/g.test(phone);
@@ -29,6 +38,26 @@ export default function Home() {
     inputValue = inputValue.replace(/\D/g, "");
     setPhone(inputValue);
   };
+
+  const handleCouponChange = (event) => {
+    const inputValue = event.target.value.toUpperCase();
+    setCoupon(inputValue);
+  };
+  const handleApplyCoupon = (event) => {
+    if (totalAmount < 100) {
+      return alert("Coupon only applicable on amount more than 100");
+    }
+    if (coupon === "HELLO100") {
+      setDiscount(100);
+      setCouponApplied(true);
+    } else {
+      setDiscount(0);
+      setCoupon("");
+      setCouponApplied(false);
+      alert("Invalid coupon");
+    }
+  };
+
   const fetchProductData = async () => {
     const res = await axios
       .get("https://groww-intern-assignment.vercel.app/v1/api/order-details")
@@ -43,16 +72,16 @@ export default function Home() {
     fetchProductData();
   }, []);
   return (
-    <div className="flex  justify-between w-full min-h-screen flex-col md:rounded-md  bg-white">
+    <div className="flex justify-between w-full min-h-screen flex-col bg-white">
       {" "}
       <div className=" w-full h-full  overflow-auto">
         <Navbar page="Checkout" />
 
         {/* Delivery Details */}
         {loading ? (
-          <div>Hello</div>
+          <Loader />
         ) : (
-          <div className="flex flex-col m-auto max-w-[1500px] lg:flex-row">
+          <div className="flex flex-col m-auto max-w-[1600px] lg:flex-row">
             <div className="w-full lg:w-3/4">
               {" "}
               <div className="px-8">
@@ -109,17 +138,25 @@ export default function Home() {
                   <div className="border-2 border-gray-300 rounded  flex ">
                     <div className=" w-full">
                       <input
+                        value={coupon}
+                        onChange={handleCouponChange}
                         type="text"
                         placeholder="Coupon Here"
-                        className="outline-none w-full font-bold p-2 px-4 bg-transparent "
+                        className="outline-none w-full text-black font-bold p-2 px-4 bg-transparent "
                       ></input>
                     </div>
                     <div className="px-4 p-2 flex items-center justify-center">
-                      <button className="text-sm text-violet-700  font-bold">
+                      <button
+                        onClick={handleApplyCoupon}
+                        className="text-sm text-violet-700  font-bold"
+                      >
                         APPLY
                       </button>
                     </div>
                   </div>
+                  {discount > 0 && (
+                    <p className="text-green-500">Coupon applied !!!</p>
+                  )}
                 </div>
               )}
 
@@ -140,7 +177,7 @@ export default function Home() {
                     </div>
                     <div className="flex py-1 text-black justify-between text-sm items-center">
                       <div>Discount</div>
-                      <div className="">0.000</div>
+                      <div className="">{discount.toFixed(3)}</div>
                     </div>
                   </div>
                 </div>
@@ -149,7 +186,9 @@ export default function Home() {
                 <div className="lg:flex hidden justify-between items-center py-5 px-8  drop-shadow-lg">
                   <div className="flex text-black flex-col gap-2">
                     <div>Total</div>
-                    <div className="font-extrabold">{totalAmount}</div>
+                    <div className="font-extrabold">
+                      {(totalAmount - discount).toFixed(3)}
+                    </div>
                   </div>
                   <div>
                     <button
