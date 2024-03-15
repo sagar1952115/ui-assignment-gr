@@ -27,7 +27,7 @@ const Navbar = ({ page }) => {
         <div className="cursor-pointer">
           {theme === "light" ? (
             <FaMoon
-              color="#bbbbbb"
+              color="#000000"
               size={25}
               onClick={() => setTheme("dark")}
             />
