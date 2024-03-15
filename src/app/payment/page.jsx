@@ -7,11 +7,27 @@ import { useRouter } from "next/navigation";
 import CheckoutModal from "../component/CheckoutModal";
 
 const Payment = () => {
-  const { totalAmount, products } = useProductStore((state) => state);
+  const {
+    totalAmount,
+    products,
+    discount,
+    setDiscount,
+    setProducts,
+    setPaymentMethods,
+  } = useProductStore((state) => state);
   const router = useRouter();
   const [selected, setSelected] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [status, setStatus] = useState({ status: "", message: "" });
+
+  console.log(
+    totalAmount,
+    products,
+    discount,
+    setDiscount,
+    setProducts,
+    setPaymentMethods
+  );
 
   function getRandomStatus() {
     const statuses = {
