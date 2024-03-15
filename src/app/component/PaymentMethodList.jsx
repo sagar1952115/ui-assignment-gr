@@ -33,6 +33,7 @@ const PaymentMethodCard = ({ data, selected, setSelected }) => {
 
 const PaymentMethodList = ({ selected, setSelected }) => {
   const { paymentMethods } = useProductStore((state) => state);
+  console.log(paymentMethods);
   return (
     <div className="py-2 flex flex-col gap-4">
       {paymentMethods.map((curr, i) => {
