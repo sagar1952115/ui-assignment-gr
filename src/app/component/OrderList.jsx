@@ -2,12 +2,19 @@ import useProductStore from "@/store/ProductStore";
 import React from "react";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import NoData from "./NoData";
+import Image from "next/image";
 
 const OrderListCard = ({ data, increment, decrement }) => {
   return (
     <div className="p-3 justify-between items-center flex shadow-md">
       <div className="">
-        <img src={data.image} className="w-12 h-12" alt="" />
+        <Image
+          src={data.image}
+          className="w-12 h-12"
+          width={120}
+          height={120}
+          alt=""
+        />
       </div>
       <div className="flex w-1/2 text-black flex-3 flex-col ">
         <div>{data.title}</div>

@@ -4,6 +4,7 @@ import { FiSun } from "react-icons/fi";
 import { FaAngleLeft } from "react-icons/fa6";
 import useThemeStore from "@/store/ThemeStore";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Navbar = ({ page }) => {
   const router = useRouter();
@@ -15,11 +16,11 @@ const Navbar = ({ page }) => {
           onClick={() => router.push("/")}
           className="text-black cursor-pointer"
         >
-          <img
+          <Image
             src="https://groww.in/groww-logo-270.png"
             width={50}
             height={50}
-            alt=""
+            alt="logo"
           />
         </div>
         <div className="font-extrabold text-2xl text-black">{page}</div>
