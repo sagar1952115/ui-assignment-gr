@@ -26,7 +26,11 @@ const Navbar = ({ page }) => {
         <div className="font-extrabold text-2xl text-black">{page}</div>
         <div className="cursor-pointer">
           {theme === "light" ? (
-            <FaMoon size={25} onClick={() => setTheme("dark")} />
+            <FaMoon
+              color="#bbbbbb"
+              size={25}
+              onClick={() => setTheme("dark")}
+            />
           ) : (
             <FiSun
               color="#ffffff"

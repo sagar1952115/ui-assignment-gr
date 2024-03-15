@@ -20,15 +20,6 @@ const Payment = () => {
   const [openModal, setOpenModal] = useState(false);
   const [status, setStatus] = useState({ status: "", message: "" });
 
-  console.log(
-    totalAmount,
-    products,
-    discount,
-    setDiscount,
-    setProducts,
-    setPaymentMethods
-  );
-
   function getRandomStatus() {
     const statuses = {
       SUCCESS: "Order successful",
@@ -53,11 +44,11 @@ const Payment = () => {
     getRandomStatus();
     setOpenModal(true);
   };
-  // useEffect(() => {
-  //   if (products.length === 0) {
-  //     router.push("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (products.length === 0) {
+      router.push("/");
+    }
+  }, []);
   return (
     <>
       <div className="flex min-h-screen   justify-between w-full h-full flex-col md:rounded-md  bg-white">
