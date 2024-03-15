@@ -6,7 +6,7 @@ import useProductStore from "@/store/ProductStore";
 import { useRouter } from "next/navigation";
 import CheckoutModal from "../component/CheckoutModal";
 
-const page = () => {
+const Payment = () => {
   const { totalAmount, products } = useProductStore((state) => state);
   const router = useRouter();
   const [selected, setSelected] = useState(null);
@@ -103,4 +103,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Payment;
